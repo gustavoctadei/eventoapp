@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
+
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
     <head>
-        <title>TODO supply a title</title>
+        <title>EventosApp</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    
     <body>
-        <h3>Olá mundo com spring boot</h3>
+        <h1>Lista de Eventos</h1>
+        <h3><a href="/cadastrarEvento">Cadastrar Evento</a></h3>
+        
+        <div th:each="evento : ${eventos}">
+            <div class="row">
+                <p><span th:text="${evento.nome}"></span></p>
+                <p><span th:text="${evento.local}"></span></p>
+                <p><span th:text="${evento.data}"></span></p>
+                <p><span th:text="${evento.horario}"></span></p>
+            </div>
+        </div>
+        
     </body>
 </html>
