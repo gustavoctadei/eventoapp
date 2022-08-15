@@ -4,7 +4,9 @@
  */
 package com.eventoapp.eventoapp.controller;
 
+import com.eventoapp.eventoapp.dao.ConvidadoDao;
 import com.eventoapp.eventoapp.dao.EventoDao;
+import com.eventoapp.eventoapp.model.Convidado;
 import com.eventoapp.eventoapp.model.Evento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class EventoController {
     
     @Autowired
     private EventoDao eventoDao;
+    
+    @Autowired
+    private ConvidadoDao convidadoDao;
     
     @RequestMapping(value="/cadastrarEvento", method=RequestMethod.GET)
     public String form() {
@@ -46,7 +51,7 @@ public class EventoController {
         return modelAndView;
     }
 
-    @RequestMapping("/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView detalhesEvento(@PathVariable("id") long idEvento) {
         Evento evento = eventoDao.findById(idEvento);
 
@@ -54,6 +59,16 @@ public class EventoController {
         modelAndView.addObject("evento", evento);
 
         return modelAndView;
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    public String salvarConvidado(@PathVariable("id") long idEvento, Convidado convidado) {
+        Evento evento = eventoDao.findById(idEvento);
+        convidado.setEvento(evento);
+        
+        convidadoDao.save(convidado);
+
+        return "redirect:/{id}";
     }
     
 }
