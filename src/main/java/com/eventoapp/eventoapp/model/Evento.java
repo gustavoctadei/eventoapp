@@ -5,10 +5,8 @@
 package com.eventoapp.eventoapp.model;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -31,6 +29,9 @@ public class Evento implements Serializable {
     private String data;
     
     private String horario;
+
+    @OneToMany
+    private List<Convidado> listaConvidados;
 
     public long getId() {
         return id;
