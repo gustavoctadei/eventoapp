@@ -8,6 +8,7 @@ import com.eventoapp.eventoapp.dao.EventoDao;
 import com.eventoapp.eventoapp.model.Evento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,6 +43,16 @@ public class EventoController {
         Iterable<Evento> eventos = eventoDao.findAll();
         modelAndView.addObject("eventos", eventos);
         
+        return modelAndView;
+    }
+
+    @RequestMapping("/{id}")
+    public ModelAndView detalhesEvento(@PathVariable("id") long idEvento) {
+        Evento evento = eventoDao.findById(idEvento);
+
+        ModelAndView modelAndView = new ModelAndView("evento/detalhesEvento");
+        modelAndView.addObject("evento", evento);
+
         return modelAndView;
     }
     

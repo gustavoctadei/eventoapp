@@ -12,5 +12,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author Gustavo
  */
 public interface EventoDao extends CrudRepository<Evento, String> {
-    
+    Evento findById(long idEvento);
 }
