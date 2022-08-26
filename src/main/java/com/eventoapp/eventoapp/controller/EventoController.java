@@ -57,6 +57,9 @@ public class EventoController {
 
         ModelAndView modelAndView = new ModelAndView("evento/detalhesEvento");
         modelAndView.addObject("evento", evento);
+        
+        Iterable<Convidado> convidados = convidadoDao.findByEvento(evento);
+        modelAndView.addObject("convidados", convidados);
 
         return modelAndView;
     }
