@@ -16,4 +16,6 @@ public interface ConvidadoDao extends CrudRepository<Convidado, String> {
     
     Iterable<Convidado> findByEvento(Evento evento);
     
+    Convidado findByRg(String rg);
+    
 }

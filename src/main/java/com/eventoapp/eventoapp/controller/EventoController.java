@@ -73,6 +73,14 @@ public class EventoController {
         return modelAndView;
     }
     
+    @RequestMapping("/deletarEvento")
+    public String deletarEvento(long idEvento) {
+        Evento evento = eventoDao.findById(idEvento);
+        eventoDao.delete(evento);
+        
+        return "redirect:/eventos";
+    }
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String salvarConvidado(@PathVariable("id") long idEvento, @Valid Convidado convidado,
             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -89,6 +97,19 @@ public class EventoController {
         
         redirectAttributes.addFlashAttribute("mensagem", "Convidado adicionado com sucesso!");
         return "redirect:/{id}";
+    }
+    
+    @RequestMapping("/deletarConvidado")
+    public String deletarConvidado(String rg) {
+        Convidado convidado = convidadoDao.findByRg(rg);
+        
+        Evento evento = convidado.getEvento();
+        long codigoEvento = evento.getId();
+        String codigo = "" + codigoEvento;
+        
+        convidadoDao.delete(convidado);
+        
+        return "redirect:/" + codigoEvento;
     }
     
 }

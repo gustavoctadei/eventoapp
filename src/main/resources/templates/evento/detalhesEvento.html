@@ -54,6 +54,7 @@
                 <tr>
                     <th>Nome</th>
                     <th>RG</th>
+                    <th>Deletar</th>
                 </tr>
             </thead>
 
@@ -61,6 +62,8 @@
                 <tr th:each="convidado : ${convidados}">
                     <td><span th:text="${convidado.nome}"></span></td>
                     <td><span th:text="${convidado.rg}"></span></td>
+                    <td><a th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidado.rg)).build()}"
+                           class="waves-effect waves-light btn-small"><i class="material-icons left">delete</i></a></td>
                 </tr>
             </tbody>
         </table>
